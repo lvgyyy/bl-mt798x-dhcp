@@ -1,0 +1,156 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+
+/dts-v1/;
+#include "mt7987b.dtsi"
+#include "mt7987-emmc.dtsi"
+#include "mt7987a-u-boot.dtsi"
+#include "mt7987-netsys-u-boot.dtsi"
+#include <dt-bindings/input/input.h>
+
+/ {
+	model = "MediaTek MT7987 NOR RFB";
+	compatible = "mediatek,mt7987b-spim-nor", "mediatek,mt7987b", "mediatek,mt7987";
+
+	aliases {
+		label-mac-device = &gmac0;
+		led-boot = &led_sys;
+		led-failsafe = &led_sys;
+		led-running = &led_sys;
+		led-upgrade = &led_sys;
+	};
+
+	chosen {
+		bootargs = "console=ttyS0,115200n1 loglevel=8 earlycon=uart8250,mmio32,0x11000000 pci=pcie_bus_perf";
+	};
+
+	bl2_verify {
+		bl2_compatible = "emmc";
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+
+		reset {
+			label = "reset";
+			linux,code = <KEY_RESTART>;
+			gpios = <&pio 1 GPIO_ACTIVE_LOW>;
+			debounce-interval = <10>;
+		};
+	};
+
+	gpio-leds {
+		compatible = "gpio-leds";
+
+		led_sys: led@0 {
+			label = "led_sys";
+			gpios = <&pio 7 GPIO_ACTIVE_LOW>;
+		};
+
+		led_wan_2p5g: led@1 {
+			label = "led_wan_2p5g";
+			gpios = <&pio 3 GPIO_ACTIVE_LOW>;
+		};
+
+		led_wan_1g: led@2 {
+			label = "led_wan_1g";
+			gpios = <&pio 5 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+
+&spi2 {
+        pinctrl-names = "default";
+        pinctrl-0 = <&spi2_flash_pins>;
+        status = "okay";
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        flash@0 {
+                #address-cells = <1>;
+                #size-cells = <1>;
+                compatible = "jedec,spi-nor";
+                spi-cal-enable;
+                spi-cal-mode = "read-data";
+                spi-cal-datalen = <7>;
+                spi-cal-data = /bits/ 8 <
+                        0x53 0x46 0x5F 0x42 0x4F 0x4F 0x54>; /* SF_BOOT */
+                spi-cal-addrlen = <1>;
+                spi-cal-addr = /bits/ 32 <0x0>;
+                reg = <0>;
+                spi-max-frequency = <52000000>;
+                spi-tx-bus-width = <4>;
+                spi-rx-bus-width = <4>;
+
+		partition@0 {
+			label = "bl2";
+			reg = <0x0 0x40000>;
+		};
+
+		partition@40000 {
+			label = "art";
+			reg = <0x40000 0x10000>;
+		};
+
+		partition@50000 {
+			label = "u-boot-env";
+			reg = <0x50000 0x10000>;
+		};
+
+		partition@60000 {
+			label = "FIP";
+			reg = <0x60000 0x200000>;
+		};
+
+		partition@260000 {
+			label = "firmware";
+			reg = <0x260000 0xda0000>;
+		};
+        };
+};
+
+&eth0 {
+        status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&mdio0_pins>;
+        phy-mode = "2500base-x";
+        phy-handle = <&phy11>;
+	
+	fixed-link {
+		speed = <2500>;
+		full-duplex;
+		pause;
+	};
+
+	phy11: ethernet-phy@11 {
+                compatible = "ethernet-phy-id03a2.a411";
+                reg = <11>;
+                phy-mode = "2500base-x";
+                airoha,polarity = <1>;
+                airoha,surge = <0>;
+                airoha,phy-handle;
+                reset-gpios = <&pio 42 GPIO_ACTIVE_LOW>;
+                reset-assert-us = <10000>;
+                reset-deassert-us = <10000>;
+        };
+};
+
+&eth1 {
+        status = "okay";
+	pinctrl-names = "i2p5gbe-led";
+        pinctrl-0 = <&i2p5gbe_led0_pins>;
+        phy-mode = "internal";
+        phy-handle = <&phy15>;
+		
+	phy15: ethernet-phy@15 {
+                compatible = "ethernet-phy-ieee802.3-c45";
+                reg = <15>;
+                phy-mode = "internal";
+        };
+};
+
+&mmc0 {
+	vmmc-supply = <&reg_3p3v>;
+	vqmmc-supply = <&reg_3p3v>;
+	status = "okay";
+};
