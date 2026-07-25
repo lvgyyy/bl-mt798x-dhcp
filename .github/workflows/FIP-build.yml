@@ -11,22 +11,22 @@ on:
       MODEL:
         description: 'Model selection'
         required: true
-        default: 'cmcc_a10'
+        default: 'beeconx_bg2509xsp'
         type: string
       FIP_VERSION: 
         description: 'FIP versions (comma-separated, e.g. 2022,2023,2024,2025/all)'
         required: true
-        default: '2024'
+        default: '2025'
         type: string
       REPO_URL:
         description: 'Source repository'
         required: true
-        default: 'https://github.com/Yuzhii0718/bl-mt798x-dhcpd'
+        default: 'https://github.com/lvgyyy/bl-mt798x-dhcp.git'
         type: string
       REPO_BRANCH:
         description: 'Repository branch'
         required: true
-        default: 'master'
+        default: '2025'
         type: string
       GPT_GEN:
         description: 'Generate GPT table image'
