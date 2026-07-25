@@ -9,7 +9,7 @@
 
 / {
 	model = "MediaTek MT7987 BeexonX BG2509XS-P";
-	compatible = "mediatek,mt7987b-spim-nor", "mediatek,mt7987b", "mediatek,mt7987";
+	compatible = "mediatek,mt7987b-nor-emmc", "mediatek,mt7987b", "mediatek,mt7987";
 
 	aliases {
 		led-boot = &led_sys;
