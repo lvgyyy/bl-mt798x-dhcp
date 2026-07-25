@@ -96,11 +96,6 @@
 			label = "FIP";
 			reg = <0x60000 0x200000>;
 		};
-
-		partition@260000 {
-			label = "firmware";
-			reg = <0x260000 0xda0000>;
-		};
         };
 };
 
