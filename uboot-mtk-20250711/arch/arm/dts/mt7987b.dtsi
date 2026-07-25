@@ -5,7 +5,7 @@
  */
 
 /dts-v1/;
-#include "mt7987b.dtsi"
+#include "mt7987a.dtsi"
 
 / {
 	compatible = "mediatek,mt7987b", "mediatek,mt7987";
