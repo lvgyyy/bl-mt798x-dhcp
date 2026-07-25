@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <boot_spi.h>
 
-#define FIP_BASE			0x60000zzz
+#define FIP_BASE			0x60000
 #define FIP_SIZE			0x200000
 
 #define MTK_QSPI_SRC_CLK		CB_MPLL_D2
