@@ -12,7 +12,6 @@
 	compatible = "mediatek,mt7987b-spim-nor", "mediatek,mt7987b", "mediatek,mt7987";
 
 	aliases {
-		label-mac-device = &gmac0;
 		led-boot = &led_sys;
 		led-failsafe = &led_sys;
 		led-running = &led_sys;
