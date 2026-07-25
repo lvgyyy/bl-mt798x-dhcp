@@ -1,4 +1,2 @@
 _PLAT_MT7987=y
 _DRAM_DDR4=y
-_BOOT_DEVICE_EMMC=y
-# _DUAL_FIP is not set
