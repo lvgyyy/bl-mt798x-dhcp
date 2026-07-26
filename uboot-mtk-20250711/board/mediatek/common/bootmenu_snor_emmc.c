@@ -39,7 +39,7 @@ static const struct data_part_entry snor_emmc_parts[] = {
 		.abbr = "fip",
 		.env_name = "bootfile.fip",
 		.validate = generic_validate_fip,
-#if defined(CONFIG_FIP_IN_SPI_NOR)
+#if defined(CONFIG_FIP_IN_SPI_NOR) || defined(CONFIG_MTK_BOOTMENU_SNOR_EMMC)
 		.write = generic_mtd_write_fip,
 #elif defined(CONFIG_FIP_IN_EMMC)
 		.write = generic_mmc_write_fip,
@@ -53,7 +53,7 @@ static const struct data_part_entry snor_emmc_parts[] = {
 		.abbr = "bl31",
 		.env_name = "bootfile.bl31",
 		.validate = generic_validate_bl31,
-#if defined(CONFIG_FIP_IN_SPI_NOR)
+#if defined(CONFIG_FIP_IN_SPI_NOR) || defined(CONFIG_MTK_BOOTMENU_SNOR_EMMC)
 		.write = generic_mtd_update_bl31,
 #elif defined(CONFIG_FIP_IN_EMMC)
 		.write = generic_mmc_update_bl31,
@@ -65,7 +65,7 @@ static const struct data_part_entry snor_emmc_parts[] = {
 		.abbr = "bl33",
 		.env_name = "bootfile.bl33",
 		.validate = generic_validate_bl33,
-#if defined(CONFIG_FIP_IN_SPI_NOR)
+#if defined(CONFIG_FIP_IN_SPI_NOR) || defined(CONFIG_MTK_BOOTMENU_SNOR_EMMC)
 		.write = generic_mtd_update_bl33,
 #elif defined(CONFIG_FIP_IN_EMMC)
 		.write = generic_mmc_update_bl33,
