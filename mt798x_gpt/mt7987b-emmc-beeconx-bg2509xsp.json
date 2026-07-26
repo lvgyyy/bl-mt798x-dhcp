@@ -1,0 +1,22 @@
+{
+	"factory": {
+		"start": 8192,
+		"end": 13311,
+		"part_type_guid": "{0fc63daf-8483-4772-8e79-3d69d8477de4}"
+	},
+	"kernel": {
+		"start": 13312,
+		"end": 78847,
+		"part_type_guid": "{0fc63daf-8483-4772-8e79-3d69d8477de4}"
+	},
+	"rootfs": {
+		"start": 78848,
+		"end": 2175999,
+		"part_type_guid": "{0fc63daf-8483-4772-8e79-3d69d8477de4}"
+	},
+	"userdata": {
+		"start": 2176000,
+		"end": 16777215,
+		"part_type_guid": "{0fc63daf-8483-4772-8e79-3d69d8477de4}"
+	}
+}
